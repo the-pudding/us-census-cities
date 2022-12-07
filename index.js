@@ -2,16 +2,15 @@ import fs from "fs";
 import * as d3 from "d3";
 
 const COLUMN_POP = "POPESTIMATE2021";
-const DENY_SUM_LEV = ["040", "050", "172"];
-const COLUMNS_KEEP = ["SUMLEV", "STATE", "COUNTY", "NAME"];
 
 const raw = d3.csvParse(fs.readFileSync("./input/sub-est2021_all.csv", "utf8"));
 
 const states = raw.filter(d => d.SUMLEV === "040");
 
 const remove = ({ SUMLEV, NAME }) => {
-		// remove state, county, conslidated city within city SUMLEV
-	if (DENY_SUM_LEV.includes(SUMLEV)) return false;
+	// remove state, county, conslidated city within city SUMLEV
+	const deny = ["040", "050", "172"];
+	if (deny.includes(SUMLEV)) return false;
 	if (NAME.includes("(pt.)")) return false;
 	if (NAME.includes("Balance of") || NAME.includes("(balance)")) return false;
 	if (NAME.endsWith(" Reservation")) return false;
@@ -52,7 +51,8 @@ const cleanCols = (d) => {
 		population
 	};
 
-	COLUMNS_KEEP.map(col => o[col] = d[col]);
+	const keep = ["SUMLEV", "STATE", "COUNTY", "NAME"];
+	keep.map(col => o[col] = d[col]);
 		
 	return o;
 };
