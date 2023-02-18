@@ -12,3 +12,4 @@
 ## Data documentation links
 * https://www2.census.gov/programs-surveys/popest/technical-documentation/file-layouts/2020-2021/SUB-EST2021.pdf
 * https://www.census.gov/programs-surveys/popest/guidance-geographies/terms-and-definitions.html
+* https://www.kaggle.com/datasets/darinhawley/us-2021-census-cities-populations-coordinates
